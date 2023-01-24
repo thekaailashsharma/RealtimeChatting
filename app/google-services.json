@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "971282799459",
+    "project_id": "realtime-chatting-9c146",
+    "storage_bucket": "realtime-chatting-9c146.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971282799459:android:070364b80f960fb26b9156",
+        "android_client_info": {
+          "package_name": "com.ktor.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971282799459-gti9frn44c3774oomk80rso11nb3fvft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7AUbovcFZSHEyDMNfQlrlLySZ9pGxthA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971282799459-gti9frn44c3774oomk80rso11nb3fvft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
