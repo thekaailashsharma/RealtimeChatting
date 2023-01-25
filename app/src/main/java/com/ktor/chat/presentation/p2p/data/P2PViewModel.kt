@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ktor.chat.data.remote.P2PMesService
 import com.ktor.chat.data.remote.P2PSession
+import com.ktor.chat.data.remote.dto.NotificationX
+import com.ktor.chat.data.remote.dto.notify
 import com.ktor.chat.presentation.chat.P2PChatMessage
 import com.ktor.chat.presentation.chat.P2PLocationMessage
 import com.ktor.chat.util.Resource
@@ -80,8 +82,21 @@ class P2PViewModel @Inject constructor(
 
 
     fun sendMessage() {
+        println("Send Message is called")
         viewModelScope.launch {
             p2PSession.sendMessage(messageText.value)
+            p2PSession.postNotify(
+                notify(
+                    notification = NotificationX(
+                        title = "New Message",
+                        body = messageText.value,
+                        mutableContent = true,
+                        sound = "Tri-tone"
+                    ),
+                    to = "/topics/all"
+                )
+            )
+
         }
     }
 

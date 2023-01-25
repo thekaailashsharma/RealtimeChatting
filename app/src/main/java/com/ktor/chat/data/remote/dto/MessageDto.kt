@@ -39,8 +39,8 @@ data class LocationMessage(
     val to: String? = null,
     val text: String? = null,
     val timeStamp: Long? = null,
-    val latitude: String?,
-    val longitude: String?,
+    val latitude: String? =  null,
+    val longitude: String? = null,
     val id:String
 )
 

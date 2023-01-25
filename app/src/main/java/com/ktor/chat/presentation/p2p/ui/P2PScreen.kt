@@ -176,12 +176,12 @@ fun P2PScreen(
                     contentDescription = "Send"
                 )
             }
-            IconButton(onClick = viewModel::sendLocation) {
-                Icon(
-                    imageVector = Icons.Default.Send,
-                    contentDescription = "Send"
-                )
-            }
+//            IconButton(onClick = viewModel::sendLocation) {
+//                Icon(
+//                    imageVector = Icons.Default.Send,
+//                    contentDescription = "Send"
+//                )
+//            }
         }
     }
 }

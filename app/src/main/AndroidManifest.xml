@@ -25,6 +25,17 @@
                     android:name="com.google.firebase.MESSAGING_EVENT">
                 </action>
             </intent-filter>
+            <intent-filter>
+                <data android:host="ktor.page.link/Nltk"
+                    android:scheme="https"
+                    />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="android.intent.action.SEARCH"/>
+                <category android:name="android.intent.category.APP_BROWSER"/>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+
         </service>
 
         <activity

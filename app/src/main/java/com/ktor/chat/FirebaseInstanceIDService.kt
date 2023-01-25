@@ -3,8 +3,10 @@ package com.ktor.chat
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -36,14 +38,21 @@ class FirebaseInstanceIDService : FirebaseMessagingService() {
             NotificationManager.IMPORTANCE_HIGH
         )
         manager.createNotificationChannel(NotificatonChannel)
-        val intent = Intent(this, MainActivity::class.java)
-        val pendingIntent =
-            PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_IMMUTABLE)
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ktor.page.link/NLtk"))
+        val pendingIntent = TaskStackBuilder.create(this).run {
+            addNextIntentWithParentStack(intent)
+            getPendingIntent(
+                0,
+                PendingIntent.FLAG_IMMUTABLE
+            )
+        }
+        pendingIntent.send()
         val NotificatonBuilder: NotificationCompat.Builder =
             NotificationCompat.Builder(this, channelId)
         NotificatonBuilder.setContentTitle(title)
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentText(message)
+            .setContentIntent(pendingIntent)
             .setAutoCancel(true).addAction(
                 R.drawable.ic_launcher_background,
                 "Open Message",

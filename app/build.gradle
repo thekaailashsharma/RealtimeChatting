@@ -79,6 +79,12 @@ dependencies {
     implementation "io.ktor:ktor-client-logging:$ktor_version"
     implementation "ch.qos.logback:logback-classic:1.2.11"
 
+    //dynamic_links
+    implementation 'com.google.firebase:firebase-dynamic-links-ktx:21.1.0'
+
+    // Official Firebase documentation suggests adding this dependency as well.
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
+
 
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
 

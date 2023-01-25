@@ -1,5 +1,7 @@
 package com.ktor.chat
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,6 +13,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.app
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ktor.chat.presentation.chat.ui.ChatScreen
 import com.ktor.chat.presentation.p2p.ui.P2PScreen
@@ -24,6 +30,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseMessaging.getInstance().subscribeToTopic("all");
+        FirebaseDynamicLinks.getInstance().getDynamicLink(Uri.parse("https://ktor.page.link/NLtk")).addOnSuccessListener {
+            println("Dynamic Links Received ${it.utmParameters}")
+        }
+
         setContent {
             RealtimeChattingTheme {
                 // A surface container using the 'background' color from the theme
@@ -51,6 +61,11 @@ class MainActivity : ComponentActivity() {
                             navArgument(name = "username") {
                                 type = NavType.StringType
                                 nullable = true
+                            }
+                        ), deepLinks = listOf(
+                            navDeepLink {
+                                uriPattern = "https://portal.siesgst.ac.in/events"
+                                action = Intent.ACTION_VIEW
                             }
                         )
                     ) {
