@@ -6,7 +6,7 @@ interface P2PMesService {
     suspend fun getAllMessages(from: String?, to: String?): List<P2PMessage>
 
     companion object{
-        val Base_URL = "https://192.168.3.75:8081"
+        val Base_URL = "https://192.168.43.75:8081"
     }
 
     sealed class Endpoints(val url: String){

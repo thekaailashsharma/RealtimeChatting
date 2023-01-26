@@ -70,6 +70,12 @@ dependencies {
     // Compose
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
 
+    //coil
+    implementation "io.coil-kt:coil-compose:2.2.2"
+
+    //glide
+    implementation "com.github.skydoves:landscapist-glide:2.1.1"
+
     // Ktor
     def ktor_version = "1.6.3"
     implementation "io.ktor:ktor-client-core:$ktor_version"
