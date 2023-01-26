@@ -47,7 +47,7 @@ fun UsernameScreen(
                         println("Image is Loading")
                     }
                     is GlideImageState.Success -> {
-                        println("Image is Success")
+                        println("Image is Successful")
                     }
                     is GlideImageState.Failure -> {
                         println("Image is Failure")
