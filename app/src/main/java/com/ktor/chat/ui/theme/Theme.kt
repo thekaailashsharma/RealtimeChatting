@@ -12,8 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.unit.Dp
 import androidx.core.view.ViewCompat
+
+
+@Composable
+fun Dp.toSp() = with(LocalDensity.current) { this@toSp.toSp() }
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
