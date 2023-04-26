@@ -9,6 +9,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -24,6 +26,7 @@ class FirebaseInstanceIDService : FirebaseMessagingService() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onMessageReceived(message: RemoteMessage) {
         println("Message Received ")
         if (message.notification != null) {
@@ -42,6 +45,7 @@ class FirebaseInstanceIDService : FirebaseMessagingService() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun generate(title: String?, message: String?, image: Bitmap) {
         val channelId = "Notify"
         val channelName = "Push Notifications"

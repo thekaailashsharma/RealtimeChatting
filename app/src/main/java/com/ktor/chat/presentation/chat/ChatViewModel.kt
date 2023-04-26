@@ -2,6 +2,7 @@ package com.ktor.chat.presentation.chat
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,6 +32,8 @@ class ChatViewModel @Inject constructor(
 
     private val _toastEvent = MutableSharedFlow<String>()
     val toastEvent = _toastEvent.asSharedFlow()
+
+    val result = MutableLiveData<String>()
 
     fun connectToChat() {
         getAllMessages()

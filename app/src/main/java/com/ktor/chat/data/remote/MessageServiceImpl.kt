@@ -32,6 +32,7 @@ class GetUsersImpl(
     override suspend fun getAllUsers(from: String?): List<UserInfo> {
         return try {
             client.get<List<UserInfo>>("${ListOfUsers.Endpoints.GetAllUsers.url}?from=$from")
+
         } catch (e: Exception){
             e.printStackTrace()
             emptyList()
