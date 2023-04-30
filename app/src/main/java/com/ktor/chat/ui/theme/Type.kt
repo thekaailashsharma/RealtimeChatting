@@ -12,6 +12,9 @@ import com.ktor.chat.R
 val loginTitle = FontFamily(
     Font(R.font.josefin)
 )
+val monteSB = FontFamily(
+    Font(R.font.montesb)
+)
 
 val Typography = Typography(
     bodyLarge = TextStyle(

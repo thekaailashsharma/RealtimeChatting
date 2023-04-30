@@ -87,7 +87,7 @@ fun LoginPage(viewModel: ChatViewModel) {
         Column(modifier = Modifier.fillMaxSize()) {
             Text(
                 text = "Sign Up Now",
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 45.sp,
                 modifier = Modifier
                     .padding(start = 15.dp, end = 10.dp, top = 15.dp, bottom = 25.dp)
@@ -112,14 +112,14 @@ fun LoginPage(viewModel: ChatViewModel) {
                 )
                 Text(
                     text = "Hi,\nThis is Kailash, Developer",
-                    color = Color.White,
+                    color = Color.Black,
                     fontSize = 15.sp,
                     modifier = Modifier.padding(15.dp)
                 )
             }
             Text(
                 text = "Enter the Following Credentials",
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 25.sp,
                 modifier = Modifier
                     .padding(start = 15.dp, end = 10.dp, top = 15.dp, bottom = 25.dp)
@@ -270,7 +270,7 @@ fun LoginPage(viewModel: ChatViewModel) {
                     Text(
                         text = "Sign Up",
                         fontSize = 20.sp,
-                        color = Color.White
+                        color = Color.Black
                     )
 
                 }
@@ -283,7 +283,7 @@ fun LoginPage(viewModel: ChatViewModel) {
                     Text(
                         text = "Login",
                         fontSize = 20.sp,
-                        color = Color.White
+                        color = Color.Black
                     )
                 }
             }
@@ -327,8 +327,8 @@ fun TextFieldWithIcons(
             },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             onValueChange = onValueChanged,
-            label = { Text(text = textValue, color = Color.White) },
-            placeholder = { Text(text = placeholder, color = Color.White) },
+            label = { Text(text = textValue, color = Color.Black) },
+            placeholder = { Text(text = placeholder, color = Color.Black) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
@@ -339,7 +339,7 @@ fun TextFieldWithIcons(
                 .fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = loginBackground,
-                textColor = Color.White
+                textColor = Color.Black
             ))
     } else {
         TextField(
@@ -352,8 +352,8 @@ fun TextFieldWithIcons(
                 )
             },
             onValueChange = onValueChanged,
-            label = { Text(text = textValue, color = Color.White) },
-            placeholder = { Text(text = placeholder, color = Color.White) },
+            label = { Text(text = textValue, color = Color.Black) },
+            placeholder = { Text(text = placeholder, color = Color.Black) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
@@ -364,7 +364,7 @@ fun TextFieldWithIcons(
                 .fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = loginBackground,
-                textColor = Color.White
+                textColor = Color.Black
             ),
 
             )
