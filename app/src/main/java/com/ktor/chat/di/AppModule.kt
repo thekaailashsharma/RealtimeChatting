@@ -24,7 +24,9 @@ object AppModule {
             install(Logging)
             install(WebSockets)
             install(JsonFeature){
-                this.serializer = KotlinxSerializer()
+                this.serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                    ignoreUnknownKeys = true
+                })
             }
         }
     }

@@ -1,5 +1,8 @@
 package com.ktor.chat.presentation.login
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -21,16 +25,51 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.ktor.chat.data.remote.dto.AllStoriesItem
 import com.ktor.chat.navigation.Screens
 import com.ktor.chat.presentation.chat.ChatViewModel
+import com.ktor.chat.presentation.users.getUsersViewModel
+import com.ktor.chat.ui.theme.P2PBackground
+import com.ktor.chat.ui.theme.TextColor
 import com.ktor.chat.ui.theme.monteSB
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.toList
+import java.io.File
 
 @Composable
-fun UIForLogin(navHostController: NavHostController, viewModel: ChatViewModel) {
+fun UIForLogin(
+    navHostController: NavHostController,
+    viewModel: ChatViewModel,
+    getUsersViewModel: getUsersViewModel = hiltViewModel(),
+) {
+    val context = LocalContext.current
+    var selectedImageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+
+    var myFile by remember {
+        mutableStateOf<File?>(null)
+    }
+    var ok by remember {
+        mutableStateOf<String?>(null)
+    }
+    println("LoaderURI = $selectedImageUri")
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        selectedImageUri = uri
+        ok =
+            selectedImageUri?.let {
+                getUsersViewModel.onFilePathsListChange(context = context,
+                    list = it)
+            }
+
+    }
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(Color.White)) {
+        .background(P2PBackground)) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             Image(
                 painter = painterResource(id = com.ktor.chat.R.drawable.loginnnnnn),
@@ -78,7 +117,7 @@ fun UIForLogin(navHostController: NavHostController, viewModel: ChatViewModel) {
                     }, fontSize = 25.sp)
                     Text(text = buildAnnotatedString {
                         withStyle(style = SpanStyle(
-                            color = Color(0xFFDB3236),
+                            color = Color(0xFF1DE9B6),
                             fontFamily = monteSB,
                         )) {
                             append("Networx")
@@ -88,7 +127,7 @@ fun UIForLogin(navHostController: NavHostController, viewModel: ChatViewModel) {
                     Spacer(modifier = Modifier.height(30.dp))
 
                     Card(
-                        colors = CardDefaults.cardColors(Color.White),
+                        colors = CardDefaults.cardColors(P2PBackground),
                         elevation = CardDefaults.cardElevation(0.dp),
                         shape = RoundedCornerShape(15.dp),
                         modifier = Modifier
@@ -103,7 +142,7 @@ fun UIForLogin(navHostController: NavHostController, viewModel: ChatViewModel) {
                         ) {
                             Text(
                                 "SignUp",
-                                color = Color.Black,
+                                color = TextColor,
                                 fontFamily = monteSB,
                                 fontSize = 19.sp,
                                 modifier = Modifier
@@ -114,12 +153,13 @@ fun UIForLogin(navHostController: NavHostController, viewModel: ChatViewModel) {
                             )
                             Text(
                                 "Login",
-                                color = Color.Black,
+                                color = TextColor,
                                 fontFamily = monteSB,
                                 fontSize = 19.sp,
-                                modifier = Modifier.padding(end = 17.dp)
+                                modifier = Modifier
+                                    .padding(end = 17.dp)
                                     .clickable {
-                                        navHostController.navigate("users/thekaailashsharma")
+                                        navHostController.navigate("users/helloDanny")
                                     }
                             )
                         }
@@ -139,7 +179,7 @@ fun UIForLogin(navHostController: NavHostController, viewModel: ChatViewModel) {
                 Icon(
                     painter = painterResource(id = com.ktor.chat.R.drawable.vector),
                     contentDescription = null,
-                    tint = Color.Unspecified,
+                    tint = TextColor,
                     modifier = Modifier.size(iconSize)
                 )
             }
@@ -147,3 +187,4 @@ fun UIForLogin(navHostController: NavHostController, viewModel: ChatViewModel) {
         }
     }
 }
+

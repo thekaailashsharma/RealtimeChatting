@@ -1,11 +1,14 @@
 package com.ktor.chat
 
+import android.Manifest.permission.READ_SMS
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
@@ -22,14 +25,23 @@ import javax.annotation.Nullable
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
+    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var viewModel: ChatViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
+        permissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) {
+
+        }
+        permissionLauncher.launch(arrayOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE
+        ))
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[ChatViewModel::class.java]
         FirebaseMessaging.getInstance().subscribeToTopic("all");
-        FirebaseDynamicLinks.getInstance().getDynamicLink(Uri.parse("https://ktor.page.link/NLtk")).addOnSuccessListener {
-            println("Dynamic Links Received ${it.utmParameters}")
-        }
+//        FirebaseDynamicLinks.getInstance().getDynamicLink(Uri.parse("https://ktor.page.link/NLtk")).addOnSuccessListener {
+//            println("Dynamic Links Received ${it.utmParameters}")
+//        }
         setContent {
             RealtimeChattingTheme {
                 NavController()
@@ -99,7 +111,7 @@ class MainActivity : ComponentActivity() {
         smsBroadcastReceiver = SmsBroadcastReceiver()
         smsBroadcastReceiver.smsBroadcastReceiverListener = object : SmsBroadcastReceiverListener {
             override fun onSuccess(intent: Intent?) {
-                startActivityForResult(intent, 200)
+                intent?.let { startActivityForResult(it, 200) }
             }
 
             override fun onFailure() {}

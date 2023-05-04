@@ -31,7 +31,8 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.ktor.chat.presentation.chat.ChatViewModel
-import com.ktor.chat.ui.theme.loginBackground
+import com.ktor.chat.ui.theme.TextColor
+import com.ktor.chat.ui.theme.P2PBackground
 import com.ktor.chat.ui.theme.loginTitle
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -82,12 +83,12 @@ fun LoginPage(viewModel: ChatViewModel) {
         contentAlignment = Alignment.TopStart,
         modifier = Modifier
             .fillMaxSize()
-            .background(loginBackground)
+            .background(P2PBackground)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Text(
                 text = "Sign Up Now",
-                color = Color.Black,
+                color = TextColor,
                 fontSize = 45.sp,
                 modifier = Modifier
                     .padding(start = 15.dp, end = 10.dp, top = 15.dp, bottom = 25.dp)
@@ -112,14 +113,14 @@ fun LoginPage(viewModel: ChatViewModel) {
                 )
                 Text(
                     text = "Hi,\nThis is Kailash, Developer",
-                    color = Color.Black,
+                    color = TextColor,
                     fontSize = 15.sp,
                     modifier = Modifier.padding(15.dp)
                 )
             }
             Text(
                 text = "Enter the Following Credentials",
-                color = Color.Black,
+                color = TextColor,
                 fontSize = 25.sp,
                 modifier = Modifier
                     .padding(start = 15.dp, end = 10.dp, top = 15.dp, bottom = 25.dp)
@@ -263,27 +264,27 @@ fun LoginPage(viewModel: ChatViewModel) {
                                 }
                             }
                     },
-                    colors = ButtonDefaults.buttonColors(loginBackground),
+                    colors = ButtonDefaults.buttonColors(P2PBackground),
                     shape = RoundedCornerShape(15.dp),
                     elevation = ButtonDefaults.buttonElevation(5.dp)
                 ) {
                     Text(
                         text = "Sign Up",
                         fontSize = 20.sp,
-                        color = Color.Black
+                        color = TextColor
                     )
 
                 }
                 Button(
                     onClick = { },
-                    colors = ButtonDefaults.buttonColors(loginBackground),
+                    colors = ButtonDefaults.buttonColors(P2PBackground),
                     shape = RoundedCornerShape(15.dp),
                     elevation = ButtonDefaults.buttonElevation(5.dp)
                 ) {
                     Text(
                         text = "Login",
                         fontSize = 20.sp,
-                        color = Color.Black
+                        color = TextColor
                     )
                 }
             }
@@ -327,8 +328,8 @@ fun TextFieldWithIcons(
             },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             onValueChange = onValueChanged,
-            label = { Text(text = textValue, color = Color.Black) },
-            placeholder = { Text(text = placeholder, color = Color.Black) },
+            label = { Text(text = textValue, color = TextColor) },
+            placeholder = { Text(text = placeholder, color = TextColor) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
@@ -338,8 +339,8 @@ fun TextFieldWithIcons(
                 .padding(start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp)
                 .fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = loginBackground,
-                textColor = Color.Black
+                containerColor = P2PBackground,
+                textColor = TextColor
             ))
     } else {
         TextField(
@@ -352,8 +353,8 @@ fun TextFieldWithIcons(
                 )
             },
             onValueChange = onValueChanged,
-            label = { Text(text = textValue, color = Color.Black) },
-            placeholder = { Text(text = placeholder, color = Color.Black) },
+            label = { Text(text = textValue, color = TextColor) },
+            placeholder = { Text(text = placeholder, color = TextColor) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
@@ -363,8 +364,8 @@ fun TextFieldWithIcons(
                 .padding(start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp)
                 .fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = loginBackground,
-                textColor = Color.Black
+                containerColor = P2PBackground,
+                textColor = TextColor
             ),
 
             )

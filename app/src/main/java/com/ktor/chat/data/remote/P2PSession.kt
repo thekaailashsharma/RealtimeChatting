@@ -1,14 +1,12 @@
 package com.ktor.chat.data.remote
 
 import com.google.android.gms.common.api.Response
-import com.ktor.chat.data.remote.dto.LocationMessage
-import com.ktor.chat.data.remote.dto.notify
-import com.ktor.chat.data.remote.dto.notifyResponse
-import com.ktor.chat.data.remote.dto.response
+import com.ktor.chat.data.remote.dto.*
 import com.ktor.chat.domains.model.Message
 import com.ktor.chat.domains.model.P2PMessage
 import com.ktor.chat.util.Resource
 import kotlinx.coroutines.flow.Flow
+import java.io.File
 
 interface P2PSession {
     suspend fun initSession(
@@ -26,10 +24,12 @@ interface P2PSession {
 
     suspend fun postNotify(request: notify): response
 
+    suspend fun uploadImage(file: File): ImageUpload
+
     suspend fun closeSession()
 
     companion object{
-        val Base_URL = "ws://192.168.43.75:8081"
+        val Base_URL = "ws://192.168.31.148:8081"
     }
 
     sealed class Endpoints(val url: String){

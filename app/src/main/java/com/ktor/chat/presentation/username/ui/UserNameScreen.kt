@@ -23,6 +23,8 @@ import androidx.navigation.NavController
 import com.ktor.chat.R
 import com.ktor.chat.navigation.Screens
 import com.ktor.chat.presentation.username.UserNameViewModel
+import com.ktor.chat.ui.theme.P2PBackground
+import com.ktor.chat.ui.theme.TextColor
 import com.ktor.chat.ui.theme.loginBackground
 
 @Composable
@@ -31,7 +33,7 @@ fun OpenScreen(
 ) {
 
     Box(modifier = Modifier
-        .background(loginBackground)) {
+        .background(P2PBackground)) {
         Image(
             painter = painterResource(id = R.drawable.dna3),
             contentDescription = "",
@@ -46,14 +48,14 @@ fun OpenScreen(
         ) {
             Button(
                 onClick = { navController.navigate(Screens.LoginScreen.route) },
-                colors = ButtonDefaults.buttonColors(loginBackground),
+                colors = ButtonDefaults.buttonColors(P2PBackground),
                 shape = RoundedCornerShape(15.dp),
                 elevation = ButtonDefaults.buttonElevation(5.dp)
             ) {
                 Text(
                     text = "Get Started",
                     fontSize = 15.sp,
-                    color = Color.White
+                    color = TextColor
                 )
 
             }
@@ -68,7 +70,7 @@ fun OpenScreen(
 //        contentAlignment = Alignment.Center
 //    ) {
 //        GlideImage(
-//            imageModel = { "http://192.168.43.75:8081/profile?username=one" }, // loading a network image using an URL.
+//            imageModel = { "http://192.168.31.148:8081/profile?username=one" }, // loading a network image using an URL.
 //            imageOptions = ImageOptions(
 //                contentScale = ContentScale.Crop,
 //                alignment = Alignment.Center

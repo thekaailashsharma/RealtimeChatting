@@ -1,7 +1,12 @@
 package com.ktor.chat.presentation.p2p.data
 
+import android.content.Context
+import android.net.Uri
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,12 +14,14 @@ import com.ktor.chat.data.remote.P2PMesService
 import com.ktor.chat.data.remote.P2PSession
 import com.ktor.chat.data.remote.dto.NotificationX
 import com.ktor.chat.data.remote.dto.notify
+import com.ktor.chat.presentation.UriPathFinder
 import com.ktor.chat.presentation.chat.P2PChatMessage
 import com.ktor.chat.presentation.chat.P2PLocationMessage
 import com.ktor.chat.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,10 +31,12 @@ class P2PViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val _messageText = mutableStateOf("")
-    val messageText: State<String> = _messageText
-
+    var messageText: MutableState<String> = _messageText
     private val _chatState = mutableStateOf(P2PChatMessage())
     val chatState: State<P2PChatMessage> = _chatState
+
+    var imageUri: MutableState<Uri?> = mutableStateOf(null)
+    var uniqueId: MutableState<String?> = mutableStateOf(null)
 
     private val _locationState = mutableStateOf(P2PLocationMessage())
     val locationState: State<P2PLocationMessage> = _locationState
@@ -122,4 +131,16 @@ class P2PViewModel @Inject constructor(
             p2PSession.closeSession()
         }
     }
+
+    fun uploadImage(file: File){
+        viewModelScope.launch {
+            val result = p2PSession.uploadImage(file)
+            println("Upload Image result is ${result.uniqueId}")
+            uniqueId.value =  file.name
+        }
+    }
+
+    private fun changeUriToPath(uris: Uri, context: Context) = UriPathFinder().getPath(context, uris)
+
+    fun onFilePathsListChange(list: Uri, context: Context): String? = changeUriToPath(list, context)
 }

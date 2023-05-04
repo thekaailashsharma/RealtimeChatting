@@ -30,7 +30,8 @@ data class MessageDto(
 data class UserInfo(
     val userName: String,
     val name: String,
-    val email: String
+    val email: String,
+    val profile: String?
 )
 
 @Serializable
